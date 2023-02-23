@@ -2,7 +2,7 @@
 seeds = false
 skip-lint = false
 [programs.localnet]
-blinders = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+blinders = "EDZae9LKkhuoRXfbL1JeR9tWeYtdnjd2v9RkWkpsGNj2"
 
 [registry]
 url = "https://api.apr.dev"
