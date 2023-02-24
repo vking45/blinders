@@ -1,6 +1,7 @@
 use anchor_lang::prelude::*;
 use crate::errors::Errors;
 
+#[account]
 pub struct Match {
 	pub title : String, //20 * 4 == 80
 	pub info : String, //100 * 4 == 400
@@ -34,9 +35,10 @@ impl Match{
         PUBLIC_KEY_LENGTH + 
         STRING_LENGTH_PREFIX + MAX_MATCH_STATE;
 
-    pub fn open_bets(&mut self) -> Result<()> {
+    pub fn open_bets(&mut self, token_acc : Pubkey) -> Result<()> {
         require!(self.match_state == MatchState::Created, Errors::MatchStateError);
         self.match_state = MatchState::Open;
+        self.token_acc = token_acc;
         Ok(())
     }
 
@@ -46,17 +48,23 @@ impl Match{
         Ok(())
     }
 
-    pub fn declare_results(&mut self) -> Result<()> {
+    pub fn declare_results(&mut self, c_one : bool, c_two : bool, c_three : bool, c_four : bool, c_five : bool) -> Result<()> {
         require!(self.match_state == MatchState::Started, Errors::MatchStateError);
         self.match_state = MatchState::Declared;
+        self.c_one = c_one;
+        self.c_two = c_two;
+        self.c_three = c_three;
+        self.c_four = c_four;
+        self.c_five = c_five;
         Ok(())
     }
 
     pub fn check_state(&self) -> MatchState {
-        return self.match_state;
+        return self.match_state.clone();
     }
 }
 
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, PartialEq, Eq)]
 pub enum MatchState {
 	Created, // The match has been listed
 	Open, // The match is now open to take bets
