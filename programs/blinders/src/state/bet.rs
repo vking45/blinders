@@ -5,8 +5,8 @@ use crate::errors::Errors;
 pub struct Bet {
 	pub match_pubkey : Pubkey, //32
 	pub amount : u64, //8
-	pub better_one : Pubkey, //32
-	pub better_two : Pubkey, //32
+	pub creator : Pubkey, //32
+	pub challenger : Pubkey, //32
 	pub bet_condition : BetConditions,
 	pub bet_state : BetState,
 }
@@ -25,9 +25,10 @@ impl Bet{
         STRING_LENGTH_PREFIX + MAX_BET_CONDITION +
         STRING_LENGTH_PREFIX + MAX_BET_STATE;
 
-	pub fn accept_bet(&mut self) -> Result<()> {
+	pub fn accept_bet(&mut self, challenger : Pubkey) -> Result<()> {
 		require!(self.bet_state == BetState::Created, Errors::BetStateError);
 		self.bet_state = BetState::Accepted;
+		self.challenger = challenger;
 		Ok(())
 	}
 

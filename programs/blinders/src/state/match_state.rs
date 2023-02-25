@@ -3,11 +3,16 @@ use crate::errors::Errors;
 
 #[account]
 pub struct Match {
-	pub title : String, //20 * 4 == 80
+	pub title : String, //30 * 4 == 120
 	pub info : String, //100 * 4 == 400
 	pub side_a : String, //10 * 4 == 40
 	pub side_b : String, //10 * 4 == 40
 	pub mint : Pubkey, //32
+    pub condition_one : String, // 50 * 4 == 200
+    pub condition_two : String, // 50 * 4 == 200
+    pub condition_three : String, // 50 * 4 == 200
+    pub condition_four : String, // 50 * 4 == 200
+    pub condition_five : String, // 50 * 4 == 200
 	pub c_one : bool, //1
 	pub c_two : bool, //1
 	pub c_three : bool, //1
@@ -20,9 +25,10 @@ pub struct Match {
 const DISCRIMINATOR_LENGTH: usize = 8;
 const PUBLIC_KEY_LENGTH: usize = 32;
 const STRING_LENGTH_PREFIX: usize = 4;
-const MAX_TITLE : usize = 20 * 4;
+const MAX_TITLE : usize = 30 * 4;
 const MAX_INFO : usize = 100 * 4;
 const MAX_SIDE : usize = 10 * 4;
+const MAX_CONDITION : usize = 50 * 4;
 const MAX_MATCH_STATE : usize = 10 * 4;
 const BOOL_LENGTH: usize = 1;
 
@@ -31,7 +37,8 @@ impl Match{
         STRING_LENGTH_PREFIX + MAX_TITLE +
         STRING_LENGTH_PREFIX + MAX_INFO + 
         (STRING_LENGTH_PREFIX + MAX_SIDE * 2) +
-        PUBLIC_KEY_LENGTH + (BOOL_LENGTH * 5) +
+        PUBLIC_KEY_LENGTH + ((STRING_LENGTH_PREFIX + MAX_CONDITION) * 5) +
+        (BOOL_LENGTH * 5) +
         PUBLIC_KEY_LENGTH + 
         STRING_LENGTH_PREFIX + MAX_MATCH_STATE;
 

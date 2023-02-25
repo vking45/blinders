@@ -13,7 +13,7 @@ pub fn create_bet(ctx : Context<CreateBet>, amount : u64, condition : BetConditi
 
     bet.match_pubkey = match_inst.key();
     bet.amount = amount as u64;
-    bet.better_one = signer.key();
+    bet.creator = signer.key();
     bet.bet_condition = condition;
     bet.bet_state = BetState::Created;
 
@@ -21,8 +21,8 @@ pub fn create_bet(ctx : Context<CreateBet>, amount : u64, condition : BetConditi
         CpiContext::new(
             token_program.to_account_info(),
             Transfer{
-                from : ctx.accounts.better_one.to_account_info(),
-                to : ctx.accounts.match_token_acc.to_account_info(),
+                from : ctx.accounts.creator_acc.to_account_info(),
+                to : ctx.accounts.token_acc.to_account_info(),
                 authority : signer.to_account_info(),
             },
         ),
@@ -51,7 +51,7 @@ pub struct CreateBet<'info> {
         token::mint = mint,
         token::authority = signer,
     )]
-    pub better_one : Box<Account<'info, TokenAccount>>,
+    pub creator_acc : Box<Account<'info, TokenAccount>>,
 
     #[account(
         mut, 
@@ -61,10 +61,11 @@ pub struct CreateBet<'info> {
 
     #[account(
         mut,
+        address = match_inst.token_acc.key(),
         token::mint = mint,
         token::authority = match_inst.token_acc,
     )]
-    pub match_token_acc : Box<Account<'info, TokenAccount>>,
+    pub token_acc : Box<Account<'info, TokenAccount>>,
 
     pub token_program : Program<'info, Token>,
 
