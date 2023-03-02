@@ -62,7 +62,7 @@ pub fn claim_bet(ctx : Context<ClaimBet>, bump : u8) -> Result<()> {
                     &[bump],
                 ]]
             ),
-            bet.amount
+            bet.amount * 2
         )?;
     } else {
         transfer(
@@ -79,7 +79,7 @@ pub fn claim_bet(ctx : Context<ClaimBet>, bump : u8) -> Result<()> {
                     &[bump],
                 ]]
             ),
-            bet.amount
+            bet.amount * 2
         )?;        
     }
 

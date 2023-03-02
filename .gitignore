@@ -6,3 +6,4 @@ target
 node_modules
 test-ledger
 blinders_wallet.json
+test-wallet.json
