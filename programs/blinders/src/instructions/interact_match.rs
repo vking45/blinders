@@ -33,7 +33,7 @@ pub fn declare_results(ctx : Context<DeclareResults>, c_one : bool, c_two : bool
 pub struct OpenBets<'info> {
     
     #[account(mut)]
-    pub match_inst : Account<'info, Match>,
+    pub match_inst : Box<Account<'info, Match>>,
 
     #[account(mut)]
     pub signer : Signer<'info>,
@@ -66,7 +66,7 @@ pub struct OpenBets<'info> {
 pub struct CloseBets<'info> {
 
     #[account(mut)]
-    pub match_inst : Account<'info, Match>,
+    pub match_inst : Box<Account<'info, Match>>,
 
     #[account(mut)]
     pub signer : Signer<'info>,    
@@ -77,7 +77,7 @@ pub struct CloseBets<'info> {
 #[derive(Accounts)]
 pub struct DeclareResults<'info> {
     #[account(mut)]
-    pub match_inst : Account<'info, Match>,
+    pub match_inst : Box<Account<'info, Match>>,
 
     #[account(mut)]
     pub signer : Signer<'info>,    

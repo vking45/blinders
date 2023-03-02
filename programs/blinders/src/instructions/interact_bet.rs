@@ -129,7 +129,7 @@ pub struct AcceptBet<'info> {
     #[account(
         address = bet.match_pubkey.key(),
     )]
-    pub match_inst : Account<'info, Match>,
+    pub match_inst : Box<Account<'info, Match>>,
 
     #[account(mut,
         address = match_inst.mint.key(),
@@ -140,14 +140,14 @@ pub struct AcceptBet<'info> {
         token::mint = mint,
         token::authority = signer,
     )]
-    pub challenger_acc : Account<'info, TokenAccount>,
+    pub challenger_acc : Box<Account<'info, TokenAccount>>,
 
     #[account(mut,
         address = match_inst.token_acc.key(),
         token::mint = mint,
         token::authority = token_acc,    
     )]
-    pub token_acc : Account<'info, TokenAccount>,
+    pub token_acc : Box<Account<'info, TokenAccount>>,
 
     pub token_program : Program<'info, Token>,
 
@@ -168,7 +168,7 @@ pub struct ClaimBet<'info> {
     #[account(
         address = bet.match_pubkey.key(),
     )]
-    pub match_inst : Account<'info, Match>,
+    pub match_inst : Box<Account<'info, Match>>,
 
     #[account(mut,
         address = match_inst.mint.key(),
@@ -185,7 +185,7 @@ pub struct ClaimBet<'info> {
         ],
         bump,    
     )]
-    pub token_acc : Account<'info, TokenAccount>,
+    pub token_acc : Box<Account<'info, TokenAccount>>,
 
     #[account(mut, 
         token::mint = mint,
@@ -218,7 +218,7 @@ pub struct WithdrawBet<'info> {
     #[account(
         address = bet.match_pubkey.key(),
     )]
-    pub match_inst : Account<'info, Match>,
+    pub match_inst : Box<Account<'info, Match>>,
 
     #[account(mut,
         address = match_inst.mint.key(),
@@ -241,7 +241,7 @@ pub struct WithdrawBet<'info> {
         ],
         bump,    
     )]
-    pub token_acc : Account<'info, TokenAccount>,
+    pub token_acc : Box<Account<'info, TokenAccount>>,
 
     pub token_program : Program<'info, Token>,
 
