@@ -1,13 +1,18 @@
-import { Route, Routes } from "react-router-dom";
-import SideBar from "./views/components/SideBar";
+import { Outlet } from "react-router-dom";
+import Navbar from "./views/components/Navbar";
+import Sidebar from "./views/components/Sidebar";
 
 import './styles/styles.css'
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<SideBar />} />
-    </Routes>
+    <div className="App">
+      <Navbar />
+      <Sidebar />
+      <main>
+        <Outlet />
+      </main>
+    </div>
   );
 }
 
