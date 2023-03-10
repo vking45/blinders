@@ -1,6 +1,8 @@
 import { BiCoinStack } from 'react-icons/bi';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 const Navbar = () => {
+
     return (
         <nav>
             <div className='shadow-md w-auto h-24'>
@@ -9,9 +11,9 @@ const Navbar = () => {
                         <strong>BLIND</strong>ERS
                     </div>
                     <div className='flex gap-5 text-gray-50'>
-                        <BiCoinStack size={28} />
+                        <BiCoinStack size={28} className="mt-2" />
                         <button>
-                            Placeholder
+                            <WalletMultiButton className='bg-gray-300' />
                         </button>
                     </div>
                 </div>
