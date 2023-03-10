@@ -1,8 +1,18 @@
 import BannerContainer from "./components/BannerContainer";
+import { useEffect } from "react";
+import { getMatches } from "./logic/firebase";
 import MatchContainer from "./components/MatchContainer";
 import UpcomingMatchContainer from "./components/UpcomingMatchContainer";
 
 const Home = () => {
+
+    useEffect(() => {
+        (async () => {
+          const raw_data = await getMatches();
+          console.log(raw_data);
+        })();
+      }, []);
+
     return (    
         <div className='flex flex-col w-[calc(100vw-5rem)] min-h-[calc(100vh-6rem)] float-right justify-center items-center bg-gray-800 py-4'>
             <BannerContainer />
