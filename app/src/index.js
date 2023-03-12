@@ -15,7 +15,7 @@ root.render(
       <App />
       <Routes>
         <Route exact path='/' element={<Home />} />
-        <Route path='/dashboard' element={<DashBoard/>} />
+        <Route path='/dashboard/' element={<DashBoard/>} />
       </Routes>
     </BrowserRouter>
     </Context>

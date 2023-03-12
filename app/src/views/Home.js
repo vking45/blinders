@@ -42,7 +42,7 @@ const Home = () => {
             <h3 className="text-3xl text-center text-white mb-5">{ live.length === 0 ?"There No Live Matches At The Moment!" : "Live Matches" }</h3>
             <div className="flex flex-wrap gap-5 justify-evenly px-4">                
                 {live.map((mat) => (
-                <MatchContainer />
+                <MatchContainer sideA={mat.SideA} sideB={mat.SideB} />
                 ))}
             </div>
             <h3 className="text-3xl text-center text-white my-5">Upcoming Matches</h3>
