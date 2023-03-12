@@ -55,7 +55,7 @@ const Home = () => {
             <h3 className="text-3xl text-center text-white my-5">Upcoming Matches</h3>
             <div className='flex flex-wrap gap-5 justify-around px-4'>
                 {upcoming.map((mat) => (
-                <UpcomingMatchContainer date={mat.Time.seconds} sideA={mat.SideA} sideB={mat.SideB} />
+                <UpcomingMatchContainer date={mat.Time.seconds} sideA={mat.SideA} sideB={mat.SideB} addr={mat.Address} />
                 ))}
             </div>
         </div>

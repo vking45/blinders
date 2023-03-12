@@ -11,17 +11,15 @@ import CreateBet from './views/CreateBet';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <React.StrictMode>
     <Context>
     <BrowserRouter>
       <App />
       <Routes>
-        <Route exact path='/' element={<Home />} />
-        <Route path='/dashboard/' element={<DashBoard/>} />
+        <Route path='/' element={<Home />} />
+        <Route path='/dashboard/:address' element={<DashBoard/>} />
         <Route path='/store' element={<Store />} />
-        <Route path='/createBet' element={<CreateBet />} />
+        <Route path='/create/:address' element={<CreateBet />} />
       </Routes>
     </BrowserRouter>
     </Context>
-  </React.StrictMode>
 );

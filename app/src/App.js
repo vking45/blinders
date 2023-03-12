@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./views/components/Navbar";
-import Sidebar from "./views/components/Sidebar";
+import SideBar from "./views/components/SideBar";
 import * as buffer from "buffer";
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Sidebar />
+      <SideBar />
       <main>
         <Outlet />
       </main>
