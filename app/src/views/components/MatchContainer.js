@@ -1,4 +1,8 @@
-const MatchContainer = () => {
+import React from "react";
+
+class MatchContainer extends React.Component {
+
+    render() {
     return (
         <div className="flex justify-between items-center w-80 bg-white p-5 rounded-lg">
             <div className="">
@@ -7,7 +11,7 @@ const MatchContainer = () => {
                 </div>
 
                 <div className="text-center">
-                    <span>Team X</span>
+                    <span>{this.props.sideA}</span>
                 </div>
             </div>
             <div className='flex justify-evenly items-center text-3xl'>
@@ -25,11 +29,12 @@ const MatchContainer = () => {
                 </div>
     
                 <div className="text-center">
-                    <span>Team Y</span>
+                    <span>{this.props.sideB}</span>
                 </div>
             </div>
         </div>
-    );
+        )
+    }
 }
 
 export default MatchContainer;

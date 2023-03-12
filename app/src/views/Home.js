@@ -1,15 +1,37 @@
 import BannerContainer from "./components/BannerContainer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getMatches } from "./logic/firebase";
 import MatchContainer from "./components/MatchContainer";
 import UpcomingMatchContainer from "./components/UpcomingMatchContainer";
+import dayjs from "dayjs";
 
 const Home = () => {
+
+    const [live, setLive] = useState([]);
+    const [upcoming, setUpcoming] = useState([]);
+
+    const now = dayjs();
 
     useEffect(() => {
         (async () => {
           const raw_data = await getMatches();
-          console.log(raw_data);
+
+          let tempLive = [];
+          let tempUpcoming = [];
+          
+          for(const i in raw_data){
+            const date = dayjs.unix(raw_data[i].Time.seconds);
+            if(date - now < 0){
+                tempLive.push(raw_data[i]);
+            }
+            else{
+                tempUpcoming.push(raw_data[i]);
+            }
+          }
+
+          setLive(tempLive);
+          setUpcoming(tempUpcoming);
+
         })();
       }, []);
 
@@ -17,32 +39,17 @@ const Home = () => {
         <div className='flex flex-col w-[calc(100vw-5rem)] min-h-[calc(100vh-6rem)] float-right justify-center items-center bg-gray-800 py-4'>
             <BannerContainer />
             
-            <h3 className="text-3xl text-center text-white mb-5">Live Matches</h3>
+            <h3 className="text-3xl text-center text-white mb-5">{ live.length === 0 ?"There No Live Matches At The Moment!" : "Live Matches" }</h3>
             <div className="flex flex-wrap gap-5 justify-evenly px-4">                
-                <MatchContainer />
-                <MatchContainer />
-                <MatchContainer />
-                <MatchContainer />
-                <MatchContainer />
-                <MatchContainer />
-                <MatchContainer />
-                <MatchContainer />
-                <MatchContainer />
-                <MatchContainer />
-                <MatchContainer />
-                <MatchContainer />
+                {live.map((mat) => (
+                <MatchContainer sideA={mat.SideA} sideB={mat.SideB} />
+                ))}
             </div>
-
             <h3 className="text-3xl text-center text-white my-5">Upcoming Matches</h3>
             <div className='flex flex-wrap gap-5 justify-around px-4'>
-                <UpcomingMatchContainer />
-                <UpcomingMatchContainer />
-                <UpcomingMatchContainer />
-                <UpcomingMatchContainer />
-                <UpcomingMatchContainer />
-                <UpcomingMatchContainer />
-                <UpcomingMatchContainer />
-                <UpcomingMatchContainer />
+                {upcoming.map((mat) => (
+                <UpcomingMatchContainer date={mat.Time.seconds} sideA={mat.SideA} sideB={mat.SideB} />
+                ))}
             </div>
         </div>
     );
