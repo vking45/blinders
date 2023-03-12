@@ -1,11 +1,15 @@
 import BannerContainer from "./components/BannerContainer";
 import { useEffect, useState } from "react";
 import { getMatches } from "./logic/firebase";
+import { getBetsOnChain, getMatchesOnChain } from "./logic/chain-calls";
 import MatchContainer from "./components/MatchContainer";
 import UpcomingMatchContainer from "./components/UpcomingMatchContainer";
 import dayjs from "dayjs";
+import { useAnchorWallet } from "@solana/wallet-adapter-react";
 
 const Home = () => {
+
+    const wallet = useAnchorWallet();
 
     const [live, setLive] = useState([]);
     const [upcoming, setUpcoming] = useState([]);
@@ -15,6 +19,9 @@ const Home = () => {
     useEffect(() => {
         (async () => {
           const raw_data = await getMatches();
+            
+            await getMatchesOnChain(wallet);
+            await getBetsOnChain(wallet);
 
           let tempLive = [];
           let tempUpcoming = [];

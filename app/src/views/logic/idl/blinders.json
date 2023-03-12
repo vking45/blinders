@@ -1,0 +1,594 @@
+{
+  "version": "0.1.0",
+  "name": "blinders",
+  "instructions": [
+    {
+      "name": "createMatch",
+      "accounts": [
+        {
+          "name": "matchInst",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "mint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "matchTitle",
+          "type": "string"
+        },
+        {
+          "name": "matchInfo",
+          "type": "string"
+        },
+        {
+          "name": "sideA",
+          "type": "string"
+        },
+        {
+          "name": "sideB",
+          "type": "string"
+        },
+        {
+          "name": "cone",
+          "type": "string"
+        },
+        {
+          "name": "ctwo",
+          "type": "string"
+        },
+        {
+          "name": "cthree",
+          "type": "string"
+        },
+        {
+          "name": "cfour",
+          "type": "string"
+        },
+        {
+          "name": "cfive",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "createBet",
+      "accounts": [
+        {
+          "name": "bet",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "matchInst",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "creatorAcc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "mint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAcc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "condition",
+          "type": {
+            "defined": "BetConditions"
+          }
+        }
+      ]
+    },
+    {
+      "name": "openBets",
+      "accounts": [
+        {
+          "name": "matchInst",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "mint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAcc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeBets",
+      "accounts": [
+        {
+          "name": "matchInst",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "declareResults",
+      "accounts": [
+        {
+          "name": "matchInst",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "cOne",
+          "type": "bool"
+        },
+        {
+          "name": "cTwo",
+          "type": "bool"
+        },
+        {
+          "name": "cThree",
+          "type": "bool"
+        },
+        {
+          "name": "cFour",
+          "type": "bool"
+        },
+        {
+          "name": "cFive",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "acceptBet",
+      "accounts": [
+        {
+          "name": "bet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "matchInst",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "mint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "challengerAcc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAcc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "claimBet",
+      "accounts": [
+        {
+          "name": "bet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "matchInst",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "mint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAcc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "challengerAcc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "creatorAcc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "withdrawBet",
+      "accounts": [
+        {
+          "name": "bet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "matchInst",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "mint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "creatorAcc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAcc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "bump",
+          "type": "u8"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Bet",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "matchPubkey",
+            "type": "publicKey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "creator",
+            "type": "publicKey"
+          },
+          {
+            "name": "challenger",
+            "type": "publicKey"
+          },
+          {
+            "name": "betCondition",
+            "type": {
+              "defined": "BetConditions"
+            }
+          },
+          {
+            "name": "betState",
+            "type": {
+              "defined": "BetState"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Match",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "info",
+            "type": "string"
+          },
+          {
+            "name": "sideA",
+            "type": "string"
+          },
+          {
+            "name": "sideB",
+            "type": "string"
+          },
+          {
+            "name": "mint",
+            "type": "publicKey"
+          },
+          {
+            "name": "conditionOne",
+            "type": "string"
+          },
+          {
+            "name": "conditionTwo",
+            "type": "string"
+          },
+          {
+            "name": "conditionThree",
+            "type": "string"
+          },
+          {
+            "name": "conditionFour",
+            "type": "string"
+          },
+          {
+            "name": "conditionFive",
+            "type": "string"
+          },
+          {
+            "name": "cOne",
+            "type": "bool"
+          },
+          {
+            "name": "cTwo",
+            "type": "bool"
+          },
+          {
+            "name": "cThree",
+            "type": "bool"
+          },
+          {
+            "name": "cFour",
+            "type": "bool"
+          },
+          {
+            "name": "cFive",
+            "type": "bool"
+          },
+          {
+            "name": "tokenAcc",
+            "type": "publicKey"
+          },
+          {
+            "name": "matchState",
+            "type": {
+              "defined": "MatchState"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "BetState",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Created"
+          },
+          {
+            "name": "Accepted"
+          },
+          {
+            "name": "Claimed"
+          },
+          {
+            "name": "Withdrawn"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BetConditions",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "One"
+          },
+          {
+            "name": "Two"
+          },
+          {
+            "name": "Three"
+          },
+          {
+            "name": "Four"
+          },
+          {
+            "name": "Five"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MatchState",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Created"
+          },
+          {
+            "name": "Open"
+          },
+          {
+            "name": "Started"
+          },
+          {
+            "name": "Declared"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "MatchStateError",
+      "msg": "The match state doesn't match the requirements"
+    },
+    {
+      "code": 6001,
+      "name": "BetStateError",
+      "msg": "The bet state doesn't match the requirements"
+    },
+    {
+      "code": 6002,
+      "name": "AuthorityError",
+      "msg": "Only the platform account can create or update matches"
+    },
+    {
+      "code": 6003,
+      "name": "BetCreationError",
+      "msg": "The match has to been Open state for the creation of bets"
+    }
+  ],
+  "metadata": {
+    "address": "EDZae9LKkhuoRXfbL1JeR9tWeYtdnjd2v9RkWkpsGNj2"
+  }
+}
