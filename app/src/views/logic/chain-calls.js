@@ -1,7 +1,7 @@
 import * as anchor from "@project-serum/anchor";
 import idl from "./idl/blinders.json";
 import * as web3 from "@solana/web3.js";
-import { getOrCreateAssociatedTokenAccount, mintTo } from "@solana/spl-token";
+import { burn, getOrCreateAssociatedTokenAccount, mintTo } from "@solana/spl-token";
 import { TOKEN_PROGRAM_ID } from "@project-serum/anchor/dist/cjs/utils/token";
 import { async } from "@firebase/util";
 
@@ -260,4 +260,85 @@ export const withdrawBet = async(wallet, match, bet, mint, creator) => {
     alert(error);
     console.log();
   }
+}
+
+export const exchangeToTokens = async (wallet, amount) => {
+  const provider = getProvider(wallet);
+  if(!provider) {
+      throw("Provider is null");
+  }
+
+  const transferTransaction = new web3.Transaction().add(
+    web3.SystemProgram.transfer({
+      fromPubkey: provider.wallet.publicKey,
+      toPubkey: sign.publicKey,
+      lamports: 100000 * amount,
+    })
+  );
+  
+  let blockhash = (await provider.connection.getLatestBlockhash('finalized')).blockhash;
+  transferTransaction.recentBlockhash = blockhash;
+  transferTransaction.feePayer = provider.wallet.publicKey;
+
+  const buyerToken = await getOrCreateAssociatedTokenAccount(provider.connection, sign, new anchor.web3.PublicKey("4ke5umoZLkRByReUXZFSUeYtD6y6WQze6cbwH9nEPefE"), provider.wallet.publicKey);
+ try{
+  await provider.wallet.signTransaction(transferTransaction);
+  await mintTo(provider.connection, sign, new anchor.web3.PublicKey("4ke5umoZLkRByReUXZFSUeYtD6y6WQze6cbwH9nEPefE"), buyerToken.address, sign.publicKey, amount * 10**6);
+  alert("Done, Exchanged!");
+} catch(error){
+  console.log(error);
+  alert(error);
+ }
+}
+
+export const tokenBalance = async(wallet) => {
+  const provider = getProvider(wallet);
+  if(!provider) {
+      throw("Provider is null");
+  }  
+
+  const Tokens = await getOrCreateAssociatedTokenAccount(provider.connection, sign, new anchor.web3.PublicKey("4ke5umoZLkRByReUXZFSUeYtD6y6WQze6cbwH9nEPefE"), provider.wallet.publicKey);
+  return Tokens.amount.toString();
+}
+
+export const SOLBalance = async(wallet) => {
+  const provider = getProvider(wallet);
+  if(!provider) {
+      throw("Provider is null");
+  }  
+  const b = await provider.connection.getBalance(provider.wallet.publicKey);
+  return b;
+}
+
+export const withdrawSOL = async(wallet, amount) => {
+  const provider = getProvider(wallet);
+  if(!provider) {
+      throw("Provider is null");
+  }
+  const transferTransaction = new web3.Transaction().add(
+    web3.SystemProgram.transfer({
+      fromPubkey: sign.publicKey,
+      toPubkey: provider.wallet.publicKey,
+      lamports: 100000 * amount,
+    })
+  );
+
+  const network = "https://api.devnet.solana.com";
+  const connection = new web3.Connection(network);  
+
+  const sellerToken = await getOrCreateAssociatedTokenAccount(provider.connection, sign, new anchor.web3.PublicKey("4ke5umoZLkRByReUXZFSUeYtD6y6WQze6cbwH9nEPefE"), provider.wallet.publicKey);
+
+  let blockhash = (await provider.connection.getLatestBlockhash('finalized')).blockhash;
+  transferTransaction.recentBlockhash = blockhash;
+  transferTransaction.feePayer = sign.publicKey;
+
+  try{
+    const { signature } = await window.solana.signAndSendTransaction(transferTransaction);
+    await connection.confirmTransaction(signature);
+    await burn(provider.connection, provider.wallet, sellerToken.address, new anchor.web3.PublicKey("4ke5umoZLkRByReUXZFSUeYtD6y6WQze6cbwH9nEPefE"), provider.wallet.publicKey, amount * 10**6);
+    alert("Done, Withdrawn!");
+  } catch(error){
+    console.log(error);
+    alert(error);
+   }  
 }
