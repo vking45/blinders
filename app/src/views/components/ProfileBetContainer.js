@@ -73,9 +73,9 @@ class ProfileBetContainer extends React.Component {
 
                 <div className="flex"> 
                 { this.props.past ?
-                    <Link className="bg-gray-500 p-1 rounded-sm text-white">Claim Bet</Link>
+                    <Link to={`/claim/${this.props.bet}`} className="bg-gray-500 p-1 rounded-sm text-white">Claim Bet</Link>
                     :
-                    <Link className="bg-gray-500 p-1 rounded-sm text-white">Withdraw Bet</Link>
+                    <Link to={`/withdraw/${this.props.bet}`} className="bg-gray-500 p-1 rounded-sm text-white">Withdraw Bet</Link>
                 }
                 </div>
             </div>

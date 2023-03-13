@@ -2,11 +2,11 @@ import React from "react";
 import dayjs from "dayjs";
 import { BiCoinStack } from "react-icons/bi";
 import { getSpecificMatch } from "../logic/firebase";
-import { Link } from "react-router-dom";
+
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 
-class BetContainer extends React.Component {
+class InActiveBetsContainer extends React.Component {
 
     state = { sideA : "", sideB : "", condition : "" , date : "" ,loading : true};
 
@@ -33,7 +33,7 @@ class BetContainer extends React.Component {
             <div className='flex flex-row gap-8'>
                 <div className="">
                     <div className="rounded-full w-20 h-20 mb-1 bg-gray-600">
-                        
+                    
                     </div>
 
                     <div className="text-center">
@@ -42,8 +42,8 @@ class BetContainer extends React.Component {
                 </div>
                 <div className='flex flex-col justify-center gap-3 items-center text-3xl h-full'>
                     <div> 
-                        <p className='text-sm mr-2 mb-1 text-center text-red-500'>Creator : </p>
-                        <p className='text-xs text-center text-black'>{this.props.creator.slice(0,10)}</p>
+                        <p className='text-sm mr-2 mb-1 text-center text-white-500'>Created By :  {this.props.creator.slice(0,10)}.. </p>
+                        <p className='text-sm mr-2 mb-1 text-center text-blue-500'>Accepted By :  {this.props.challenger.slice(0,10)}.. </p>
                     </div>
                 </div>
                 <div className="">
@@ -70,18 +70,10 @@ class BetContainer extends React.Component {
                     <BiCoinStack size={28} title="Prize" />
                     <span>{this.props.amount}</span>
                 </div>
-
-                <div className="flex"> 
-                { this.props.past ?
-                    <Link to={`/withdraw/${this.props.bet}/`} className="bg-gray-500 p-1 rounded-sm text-white">Withdraw Bet</Link>
-                    :
-                    <Link to={`/accept/${this.props.bet}/`} className="bg-gray-500 p-1 rounded-sm text-white">Accept Bet</Link>
-                }
-                </div>
             </div>
         </div>
     );
     }
 }
 
-export default BetContainer;
+export default InActiveBetsContainer;

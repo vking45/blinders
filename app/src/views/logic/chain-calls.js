@@ -220,3 +220,44 @@ export const claimBet = async(wallet, match, bet, mint, creator, challenger) => 
         console.log();
       }
 }
+
+export const withdrawBet = async(wallet, match, bet, mint, creator) => {
+  const provider = getProvider(wallet);
+  if(!provider) {
+      throw("Provider is null");
+  }
+  const temp = JSON.parse(JSON.stringify(idl));
+  const program = new anchor.Program(temp, temp.metadata.address, provider);
+
+  const creator_acc = await getOrCreateAssociatedTokenAccount(provider.connection, sign, mint, creator);
+
+  const [mintAcc, mintAccBump] = anchor.web3.PublicKey.findProgramAddressSync(
+    [match.toBuffer(),
+      mint.toBuffer()
+    ],
+    program.programId
+  );
+
+  try{
+    const tx = await program.methods.withdrawBet(mintAccBump)
+    .accounts({
+      bet : bet,
+      sign : provider.wallet.publicKey,
+      matchInst : match,
+      mint : mint,
+      creatorAcc : creator_acc.address,
+      tokenAcc : mintAcc,
+      tokenProgram : TOKEN_PROGRAM_ID,
+      systemProgram : anchor.web3.SystemProgram.programId,
+    })
+    .signers([])
+    .rpc();
+    console.log("Withdrawn Successfully", tx);
+    alert("The Bet Has Been Withdrawn Successfully");
+    console.log();       
+  } catch(error){
+    console.log(error);
+    alert(error);
+    console.log();
+  }
+}
