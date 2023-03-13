@@ -21,7 +21,6 @@ const Home = () => {
           const raw_data = await getMatches();
             
             await getMatchesOnChain(wallet);
-            await getBetsOnChain(wallet);
 
           let tempLive = [];
           let tempUpcoming = [];
@@ -46,13 +45,13 @@ const Home = () => {
         <div className='flex flex-col w-[calc(100vw-5rem)] min-h-[calc(100vh-6rem)] float-right justify-center items-center bg-gray-800 py-4'>
             <BannerContainer />
             
-            <h3 className="text-3xl text-center text-white mb-5">{ live.length === 0 ?"There No Live Matches At The Moment!" : "Live Matches" }</h3>
+            <h3 className="text-3xl text-center text-white mb-5">{ live.length === 0 ?"There Are No Live Matches At The Moment!" : "Live Matches" }</h3>
             <div className="flex flex-wrap gap-5 justify-evenly px-4">                
                 {live.map((mat) => (
                 <MatchContainer sideA={mat.SideA} sideB={mat.SideB} />
                 ))}
             </div>
-            <h3 className="text-3xl text-center text-white my-5">Upcoming Matches</h3>
+            <h3 className="text-3xl text-center text-white my-5">{ upcoming.length === 0 ? "There Are No Upcoming Matches At The Moment" : "Upcoming Matches"}</h3>
             <div className='flex flex-wrap gap-5 justify-around px-4'>
                 {upcoming.map((mat) => (
                 <UpcomingMatchContainer date={mat.Time.seconds} sideA={mat.SideA} sideB={mat.SideB} addr={mat.Address} />

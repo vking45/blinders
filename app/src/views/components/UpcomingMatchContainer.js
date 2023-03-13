@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 
+// <button className="justify-self-end text-lg text-center text-white bg-gray-700 px-3 rounded">Bet</button>
+// to={`/create/${this.props.addr}/`}
+
 class UpcomingMatchContainer extends React.Component {
 
     render() {
@@ -23,7 +26,7 @@ class UpcomingMatchContainer extends React.Component {
                     <p className='text-lg mr-2 mb-1 text-center text-red-500'>{dayjs.unix(this.props.date).fromNow(true)}</p>
                     <p className='text-xs text-center text-black'>{dayjs.unix(this.props.date).format('DD/MM/YYYY')}</p>
                 </div>
-                <Link to={`/create/${this.props.addr}/`} className="justify-self-end text-lg text-center text-white bg-gray-700 px-3 rounded">Bet</Link>
+                <Link className="justify-self-end text-lg text-center text-white bg-gray-700 px-3 rounded" to={`/dashboard/${this.props.addr}`}>Explore</Link>
             </div>
             <div className="">
                 <div className="rounded-full w-20 h-20 mb-1 bg-gray-600">

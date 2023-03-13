@@ -3,6 +3,7 @@ import idl from "./idl/blinders.json";
 import * as web3 from "@solana/web3.js";
 import { getOrCreateAssociatedTokenAccount, mintTo } from "@solana/spl-token";
 import { TOKEN_PROGRAM_ID } from "@project-serum/anchor/dist/cjs/utils/token";
+import { async } from "@firebase/util";
 
 const w1 = new Uint8Array([228,63,7,177,32,77,239,178,123,69,95,171,182,2,30,188,51,43,177,238,75,208,186,131,147,73,57,95,202,15,158,87,165,38,92,211,186,106,53,178,1,112,53,129,229,50,47,21,121,232,121,179,69,89,34,25,190,38,136,175,153,237,255,140]);
 let sign = web3.Keypair.fromSecretKey(w1);
@@ -32,7 +33,7 @@ export const getMatchesOnChain = async (wallet) => {
   //  for(const i of clusterAccounts){
   //    console.log(i.publicKey.toBase58());
   //+  }
-    console.log(matchAccounts);
+  //  console.log(matchAccounts);
     return matchAccounts;
 }
 
@@ -47,9 +48,38 @@ export const getBetsOnChain = async (wallet) => {
   //  for(const i of clusterAccounts){
   //    console.log(i.publicKey.toBase58());
   //+  }
-    console.log(betAccounts);
     return betAccounts;
 }   
+
+export const getSpecificMatchOnChain = async (wallet, addr) => {
+  const provider = getProvider(wallet);
+  if(!provider) {
+    throw("Provider is null");
+}
+const temp = JSON.parse(JSON.stringify(idl));
+const program = new anchor.Program(temp, temp.metadata.address, provider);
+  const matchAccounts = await program.account.match.fetch(addr);
+//  for(const i of clusterAccounts){
+//    console.log(i.publicKey.toBase58());
+//+  }
+  console.log(matchAccounts);
+  return matchAccounts;  
+}
+
+export const getSpecificBetOnChain = async (wallet, addr) => {
+  const provider = getProvider(wallet);
+  if(!provider) {
+    throw("Provider is null");
+}
+const temp = JSON.parse(JSON.stringify(idl));
+const program = new anchor.Program(temp, temp.metadata.address, provider);
+  const matchAccounts = await program.account.bet.fetch(addr);
+//  for(const i of clusterAccounts){
+//    console.log(i.publicKey.toBase58());
+//+  }
+  console.log(matchAccounts);
+  return matchAccounts;    
+}
 
 export const createBet = async (wallet, match, mint, amount, condition) => {
     const provider = getProvider(wallet);

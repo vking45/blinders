@@ -1,7 +1,3 @@
-import { AiOutlineSwap } from "react-icons/ai";
-import { FaCoins } from "react-icons/fa";
-import { TbCurrencySolana } from "react-icons/tb";
-import { RiErrorWarningLine } from "react-icons/ri";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as anchor from "@project-serum/anchor";
@@ -31,7 +27,6 @@ const CreateBet = () => {
             const found = raw_data.find(el => el.publicKey.toBase58() === address);
             const match = await getSpecificMatch(address);
             setMatch(found);
-            console.log(match);
             setLoaded(true);
             setFire(match);
             setLoading(false);
@@ -89,20 +84,6 @@ const CreateBet = () => {
                 <div className="flex w-full flex-col gap-4 items-center">
                     <label htmlFor="withdraw-amt" className="self-start">Bet Amount</label>
                     <input type="number" min={1} id="withdraw-amt" className="w-full border-b-2 border-gray-600 outline-none" value={amt} onChange={(e) => setAmt(e.target.value)} />
-
-                    <div className="flex w-full justify-center gap-8">
-                        <button className="rounded-md bg-gray-600 text-white px-2">
-                            100%
-                        </button>
-
-                        <button className="rounded-md bg-gray-600 text-white px-2">
-                            50%
-                        </button>
-
-                        <button className="rounded-md bg-gray-600 text-white px-2">
-                            25%
-                        </button>
-                    </div>
 
                     <button className="rounded-md bg-gray-600 text-white w-full p-2" onClick={onCreate}>
                         { loading ? "Loading.." : "Create Bet" }
