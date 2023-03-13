@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import PreviousMatchContainer from "./components/PreviousMatchContainer";
 
-const Home = () => {
+const Soccer = () => {
 
     const wallet = useAnchorWallet();
 
@@ -30,6 +30,7 @@ const Home = () => {
           let past = [];
           
           for(const i in raw_data){
+            if(raw_data[i].Type == "Soccer"){
             const date = dayjs.unix(raw_data[i].Time.seconds);
             if(date - now < 0 && raw_data[i].Past === false){
                 tempLive.push(raw_data[i]);
@@ -39,6 +40,7 @@ const Home = () => {
             }
             else{
                 tempUpcoming.push(raw_data[i]);
+            }
             }
           }
 
@@ -77,4 +79,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default Soccer;
