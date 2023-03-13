@@ -64,7 +64,7 @@ const Store = () => {
                 </div>
 
                 <div className="flex flex-col gap-4 items-center">
-                    <label htmlFor="withdraw-amt">Withdraw Amount</label>
+                    <label htmlFor="withdraw-amt">Exchange Amount</label>
                     <input type="number" min={1} value={amt} id="withdraw-amt" className="border-b-2 border-gray-600 outline-none" onChange={(e) => setAmt(e.target.value)}/>
 
                     <button className="rounded-md bg-gray-600 text-white w-48 p-2" onClick={onExchange}>

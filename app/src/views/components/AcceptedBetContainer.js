@@ -67,7 +67,7 @@ class AcceptedBetContainer extends React.Component {
             <div className='flex flex-row justify-between items-center w-full'>
                 <div className="flex justify-center items-center">
                     <BiCoinStack size={28} title="Prize" />
-                    <span>{this.props.amount}</span>
+                    <span>{this.props.amount/10**6}</span>
                 </div>
             </div>
         </div>
