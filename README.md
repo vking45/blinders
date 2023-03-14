@@ -1,6 +1,6 @@
 # Blinders - A Solana Grizzlython Project
 
-A DeFi Platform for Solana that does the Token Aggregation, Cluster Marketplace, Offering Flash Loans & NFT insurance at a single place. 
+A Solana Betting Platform
 
 ### What Sets Us Apart ?
 A Truly On-Chain P2P Betting Platform. All The Funds Are Managed In A Complete Trustless Way On-Chain. DAO Will Add New Matches And Update The Match States Thus Providing Decentralization To The Whole Experience.
