@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const SideBar = () => {
     return (
-        <div className="fixed top-0 left-0 h-screen w-20 m-0 flex flex-col bg-gray-900 text-white shadow-lg">
+        <div className="fixed top-0 left-0 h-screen w-20 m-0 flex flex-col bg-darker-bg text-white shadow-lg">
             <Link to='/home/'><SidebarIcon icon={<FaHome size='28' />} text='Home' /></Link>
             <Link to='/soccer/'><SidebarIcon icon={<GiSoccerBall size='28' />} text='Soccer' /></Link>
             <Link to='/basketball/'><SidebarIcon icon={<FaBasketballBall size='28' />} text='Basket Ball' /></Link>
