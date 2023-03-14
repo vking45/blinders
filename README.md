@@ -13,6 +13,7 @@ We Are Using The Chips Model, Wherein Users Will Have To Exchange SOL For Blinde
 > [Deployed Website](https://blinders.vercel.app/) <br />
 > [Twitter Account](https://twitter.com/blinders_sol?s=20) <br />
 > [PitchDeck](https://drive.google.com/file/d/1jy5WyrzaEHRy1oOMwS3dlJ1RLTaWyVrD/view?usp=sharing) <br />
+> [Demo](https://youtu.be/-W3najsSaZU) <br />
 
 ### Tracks - 
 
