@@ -33,7 +33,7 @@ const LiveDashBoard = () => {
       }, []);
 
     return (
-        <div className='flex flex-col w-[calc(100vw-5rem)] min-h-[calc(100vh-6rem)] float-right justify-center items-center bg-gray-800 py-4'>
+        <div className='flex flex-col w-[calc(100vw-5rem)] min-h-[calc(100vh-6rem)] float-right justify-center items-center bg-dark-bg py-4'>
             <h3 className="text-3xl text-center text-white my-5"> { loaded ? match[0].Title + " - " + match[0].SideA + " Vs " + match[0].SideB  : "Loading..."} </h3> <br />
             <h3 className="text-3xl text-center text-white mb-5"> { loaded && bets.length !== 0 ? "Bets" : "There Are No Bets" }</h3>
             { loaded ? 

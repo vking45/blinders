@@ -32,7 +32,7 @@ const Store = () => {
       }, []);    
 
     return (
-        <div className='flex flex-col w-[calc(100vw-5rem)] min-h-[calc(100vh-6rem)] float-right justify-center items-center bg-gray-800 py-4'>
+        <div className='flex flex-col w-[calc(100vw-5rem)] min-h-[calc(100vh-6rem)] float-right justify-center items-center bg-dark-bg py-4'>
             <div className="flex flex-col justify-between items-center w-6/12 gap-5 bg-white p-5 rounded-lg">
                 <div className="flex w-full justify-between">
                     <div className="">

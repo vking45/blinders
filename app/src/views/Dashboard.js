@@ -40,7 +40,7 @@ const DashBoard = () => {
       }, []);
 
     return (
-        <div className='flex flex-col w-[calc(100vw-5rem)] min-h-[calc(100vh-6rem)] float-right justify-center items-center bg-gray-800 py-4'>
+        <div className='flex flex-col w-[calc(100vw-5rem)] min-h-[calc(100vh-6rem)] float-right justify-center items-center bg-dark-bg py-4'>
             <h3 className="text-3xl text-center text-white my-5"> { loaded ? match[0].Title + " - " + match[0].SideA + " Vs " + match[0].SideB  : "Loading..."} </h3> <br />
             { loaded ? <Link to={`/create/${match[0].Address}/`} className="fixed bottom-10 right-10 bg-gray-500 p-2 px-4 rounded-sm text-white">Create Bet</Link> : ""}
             <h3 className="text-3xl text-center text-white mb-5"> { loaded && avail.length !== 0 ? "Available Bets" : "There Are No Available Bets At The Moment" }</h3>

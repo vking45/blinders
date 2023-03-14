@@ -51,7 +51,7 @@ const Home = () => {
 
     return (    
       <div>
-        <div className='flex flex-col w-[calc(100vw-5rem)] min-h-[calc(100vh-6rem)] float-right justify-center items-center bg-gray-800 py-4'>
+        <div className='flex flex-col w-[calc(100vw-5rem)] min-h-[calc(100vh-6rem)] float-right justify-center items-center bg-dark-bg py-4'>
             <BannerContainer />
             
             <h3 className="text-3xl text-center text-white mb-5 mt-2">{ live.length === 0 ?"There Are No Live Matches At The Moment!" : "Live Matches" }</h3>
