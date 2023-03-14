@@ -6,6 +6,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'dark-bg': '#18122B',
+        'purple-bg': '#393053',
+        'purple-bg-dark': '#2b1e56',
+        'purple-light': '#443C68',
+        'purple-lighter': '#635985',
+        'darker-bg': '#100b22',
         gray: {
           900: '#202225',
           800: '#2f3136',
