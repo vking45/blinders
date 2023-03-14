@@ -36,7 +36,7 @@ const CreateBet = () => {
 
     const onCreate = async() => {
         setLoading(true);
-        await createBet(wallet, new anchor.web3.PublicKey(address), new anchor.web3.PublicKey(match.account.mint.toBase58()), new anchor.BN(amt), option);
+        await createBet(wallet, new anchor.web3.PublicKey(address), new anchor.web3.PublicKey(match.account.mint.toBase58()), new anchor.BN(amt * 10**6), option);
         setLoading(false);
     }
 

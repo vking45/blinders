@@ -68,7 +68,7 @@ class ProfileBetContainer extends React.Component {
                 <div className="flex justify-center items-center">
                     {/* <p className="rounded-md text-sm text-center">Prize</p> */}
                     <BiCoinStack size={28} title="Prize" />
-                    <span>{this.props.amount}</span>
+                    <span>{this.props.amount/10**6}</span>
                 </div>
 
                 <div className="flex"> 
